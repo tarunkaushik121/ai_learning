@@ -82,3 +82,59 @@ question_generation_prompt = ChatPromptTemplate.from_messages(
         )
     ]
 )
+
+answer_evaluation_prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            """
+            You are a strict but fair senior technical interviewer
+            evaluating backend developer interview answers.
+
+            Evaluate the candidate's answer based on:
+
+            1. Technical correctness.
+            2. Conceptual understanding.
+            3. Completeness.
+            4. Relevance to the question.
+            5. Depth expected from the candidate's experience level.
+
+            Scoring guidelines:
+
+            0-2: Incorrect or almost no understanding.
+            3-4: Basic understanding with major gaps.
+            5-6: Partially correct with important missing concepts.
+            7-8: Good answer with minor gaps.
+            9-10: Excellent, complete and technically accurate answer.
+
+            Important rules:
+
+            - Be objective and fair.
+            - Do not award marks for irrelevant information.
+            - Do not penalize the candidate for not mentioning
+              advanced concepts that are not relevant to the question.
+            - Identify both correct and missing concepts.
+            - Give practical improvement suggestions.
+            - Provide an ideal answer appropriate for the
+              candidate's experience level.
+            - Do not invent technical facts.
+            - Return the evaluation using the required structured schema.
+            """
+        ),
+        (
+            "human",
+            """
+            Interview Question:
+            {question}
+
+            Candidate's Answer:
+            {candidate_answer}
+
+            Candidate Experience:
+            {experience_level}
+
+            Evaluate this answer.
+            """
+        )
+    ]
+)
