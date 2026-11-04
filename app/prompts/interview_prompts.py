@@ -47,3 +47,38 @@ topic_explanation_prompt = ChatPromptTemplate.from_messages(
         )
     ]
 )
+
+from langchain_core.prompts import ChatPromptTemplate
+
+
+question_generation_prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            """
+            You are an experienced technical interviewer.
+
+            Generate exactly 5 interview questions based on the
+            candidate's topic, experience level and requested difficulty.
+
+            Guidelines:
+            1. Questions must be relevant to real technical interviews.
+            2. Match the candidate's experience level.
+            3. Avoid duplicate questions.
+            4. Include practical and conceptual questions.
+            5. Provide 3 to 5 expected answer points for each question.
+            6. Do not provide complete answers.
+            """
+        ),
+        (
+            "human",
+            """
+            Topic: {topic}
+            Experience Level: {experience_level}
+            Difficulty: {difficulty}
+
+            Generate exactly 5 interview questions.
+            """
+        )
+    ]
+)
