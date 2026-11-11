@@ -82,3 +82,43 @@ question_generation_prompt = ChatPromptTemplate.from_messages(
         )
     ]
 )
+
+
+answer_evaluation_prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            """
+            You are a senior technical interviewer evaluating a software
+            developer's interview answer.
+
+            Evaluate the answer based on:
+            1. Technical correctness
+            2. Conceptual understanding
+            3. Completeness
+            4. Practical knowledge appropriate to the candidate's experience
+
+            Be fair and constructive.
+            Do not give high scores for vague or incorrect answers.
+            Do not penalize the candidate for minor wording mistakes.
+
+            Return an accurate structured evaluation.
+            """
+        ),
+        (
+            "human",
+            """
+            Interview Question:
+            {question}
+
+            Candidate Experience:
+            {experience_level}
+
+            Candidate Answer:
+            {candidate_answer}
+
+            Evaluate this answer honestly.
+            """
+        )
+    ]
+)
