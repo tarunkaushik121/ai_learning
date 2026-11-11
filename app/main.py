@@ -1,35 +1,25 @@
 
-from app.services.interview_service import explain_topic
+from fastapi import FastAPI
+
+from app.api.routes.health import router as health_router
+from app.api.routes.interviews import router as interview_router
 
 
-def main():
+def create_app() -> FastAPI:
 
-    print("===================================")
-    print(" AI INTERVIEW PREPARATION ASSISTANT")
-    print("===================================")
-
-    topic = input("\nEnter technical topic: ")
-
-    experience_level = input(
-        "Enter experience level: "
+    application = FastAPI(
+        title="AI Interview Assistant API",
+        description=(
+            "AI-powered interview assistant using "
+            "LangChain, LangGraph and FastAPI."
+        ),
+        version="1.0.0"
     )
 
-    difficulty = input(
-        "Enter difficulty (Beginner/Intermediate/Advanced): "
-    )
+    application.include_router(health_router)
+    application.include_router(interview_router)
 
-    print("\nGenerating AI explanation...\n")
-
-    response = explain_topic(
-        topic=topic,
-        experience_level=experience_level,
-        difficulty=difficulty
-    )
-
-    print("\n========== AI RESPONSE ==========\n")
-
-    print(response)
+    return application
 
 
-if __name__ == "__main__":
-    main()
+app = create_app()
