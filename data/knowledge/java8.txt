@@ -1,0 +1,30 @@
+
+Java 8 Interview Preparation
+
+Functional Interfaces:
+A functional interface contains exactly one abstract method.
+Functional interfaces support lambda expressions.
+Examples include Runnable, Callable, Predicate, Function,
+Consumer, and Supplier.
+
+Lambda Expressions:
+Lambda expressions provide a concise way to represent
+implementations of functional interfaces.
+They were introduced in Java 8.
+
+Stream API:
+The Stream API supports declarative processing of data.
+Common operations include filter, map, flatMap, and reduce.
+Intermediate operations are lazy.
+Terminal operations trigger execution.
+
+Optional:
+Optional is a container that may or may not contain a value.
+It helps developers explicitly handle absent values.
+Optional does not automatically prevent all
+NullPointerExceptions.
+
+Default Methods:
+Interfaces can declare methods with default implementations.
+This supports API evolution while preserving compatibility
+with many existing implementations.
