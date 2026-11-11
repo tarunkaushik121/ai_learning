@@ -1,3 +1,4 @@
+
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -5,27 +6,49 @@ from pydantic import BaseModel, Field
 
 class InterviewQuestion(BaseModel):
     question: str = Field(
-        description="An interview question relevant to the given topic."
+        description="An interview question."
     )
 
-    difficulty: Literal["Easy", "Intermediate", "Advanced"] = Field(
-        description="Difficulty level of the question."
-    )
+    difficulty: Literal[
+        "Easy", "Intermediate", "Advanced"
+    ]
 
     expected_points: list[str] = Field(
-        description="Key concepts expected in a good candidate's answer."
+        description="Important concepts expected in the answer."
     )
 
 
 class InterviewQuestionSet(BaseModel):
-    topic: str = Field(
-        description="The interview topic."
+    topic: str
+    difficulty: Literal[
+        "Easy", "Intermediate", "Advanced"
+    ]
+
+    questions: list[InterviewQuestion]
+
+
+class AnswerEvaluation(BaseModel):
+    score: float = Field(
+        ge=0,
+        le=10,
+        description="Answer score between 0 and 10."
     )
 
-    difficulty: Literal["Easy", "Intermediate", "Advanced"] = Field(
-        description="Overall difficulty requested by the candidate."
-    )
+    verdict: Literal[
+        "Excellent",
+        "Good",
+        "Average",
+        "Needs Improvement"
+    ]
 
-    questions: list[InterviewQuestion] = Field(
-        description="Exactly five relevant interview questions."
-    )
+    technical_correctness: str
+
+    strengths: list[str]
+
+    missing_concepts: list[str]
+
+    improvement_suggestions: list[str]
+
+    ideal_answer: str
+
+    feedback_summary: str
