@@ -4,3 +4,8 @@ __pycache__/
 .env
 *.pyc
 data/vector_store/
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+data/vector_store/
